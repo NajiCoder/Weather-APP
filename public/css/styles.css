@@ -10,10 +10,11 @@ html {
   text-align: center;
 } */
 
-/* .result {
-  position: relatives;
+.res {
+  position: absolute;
+  width: 100%;
   text-align: center;
-} */
+}
 
 .section {
   padding: 300px 400px;

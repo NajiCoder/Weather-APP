@@ -12,9 +12,12 @@
 </head>
 <body>
     
-    <div class="rersult">
+    <div class="res">
         <h1>Welcom to <%= cityName %></h1>
-        <p>The weather in <%= cityName %> is <%= temperature %> degrees Celsius.</p>
+        <p>The weather in <%= cityName %> is <%= temperature %> °C, feels like <%= feelsLike %> °C</p>
+        <p>Weather description : <%= description %>,  pressure : <%= pressure %>,  Humidity : <%= humidity %>, Wind speed : <%= wind %></p>
+        <p>There is a minimum temp of <%= minTemp %> °C and a maximmun temp of <%= maxTemp %> °C</p>
+        <img src="<%=image%>" alt="">
     </div>
 
     

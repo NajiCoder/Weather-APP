@@ -7,15 +7,15 @@ const appKey = "ef1b3abbb663e9d15a3b35c580151915";
 
 const app = express();
 
-const weatherDataObject = {
-    cityName: "",
-    temperature: "",
-};
+// Create an empty object to star the data from the api
+const weatherDataObject = {};
+
 // add EJS to express app
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
 
+// Use .static to be able to acces the css file inside public folder
 app.use(express.static("public"));
 
 app.get("/", function(req, res){
@@ -34,6 +34,7 @@ app.post("/", function(req, res){
 
     // get city name from the HTML input
     const city = req.body.CityName;
+    // Add the city name to the global object
     weatherDataObject["cityName"] = city
 
     // Use the Geocoding API to get all the information on the city entered
@@ -64,12 +65,28 @@ app.post("/", function(req, res){
                     // Transform the data to a JSON formmat using JSON.parse
                     const weatherData = JSON.parse(data);
 
+                    // Store the data received from the api
                     const temp = weatherData.main.temp; 
+                    const feelsLike = weatherData.main.feels_like
                     const description = weatherData.weather[0].description;
+                    const tempMin = weatherData.main.temp_min;
+                    const tempMax = weatherData.main.temp_max;
+                    const pressure = weatherData.main.pressure;
+                    const humidity = weatherData.main.humidity;
+                    const windSpeed = weatherData.wind.speed;
                     const icon = weatherData.weather[0].icon;
                     const imageUrl = "https://openweathermap.org/img/wn/"+ icon +"@2x.png";
                     
-                    weatherDataObject["temperature"]=temp;
+                    // add the data to the global object
+                    weatherDataObject["temperature"] = temp;
+                    weatherDataObject["feelsLike"] = feelsLike;
+                    weatherDataObject["description"] = description;
+                    weatherDataObject["pressure"] = pressure;
+                    weatherDataObject["humidity"] = humidity;
+                    weatherDataObject["wind"] = windSpeed;
+                    weatherDataObject["minTemp"] = tempMin;
+                    weatherDataObject["maxTemp"] = tempMax;
+                    weatherDataObject["image"] = imageUrl;
 
                     console.log(weatherDataObject);
 
