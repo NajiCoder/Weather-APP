@@ -7,6 +7,10 @@ const appKey = "ef1b3abbb663e9d15a3b35c580151915";
 
 const app = express();
 
+const weatherDataObject = {
+    cityName: "",
+    temperature: "",
+};
 // add EJS to express app
 app.set('view engine', 'ejs');
 
@@ -22,10 +26,15 @@ app.get("/", function(req, res){
     
 });
 
+app.get("/work", function(req, res){
+    res.render("weather",weatherDataObject);
+})
+
 app.post("/", function(req, res){
 
     // get city name from the HTML input
     const city = req.body.CityName;
+    weatherDataObject["cityName"] = city
 
     // Use the Geocoding API to get all the information on the city entered
     const locationUrl = "https://api.openweathermap.org/geo/1.0/direct?q="+ city +"&appid=" + appKey
@@ -60,12 +69,18 @@ app.post("/", function(req, res){
                     const icon = weatherData.weather[0].icon;
                     const imageUrl = "https://openweathermap.org/img/wn/"+ icon +"@2x.png";
                     
-                    // To send multiple things use .write method and just call .send() after writng everything you wanted
-                    res.write("<h1>The weather in "+ city +" is " +temp + " degrees celcius</h1>");
-                    res.write("<h3>Currently " + description + " in "+ city +"</h3>");
-                    res.write("<img src="+ imageUrl +"></br>");
+                    weatherDataObject["temperature"]=temp;
 
-                    res.send();
+                    console.log(weatherDataObject);
+
+                    res.redirect("/work");
+                    
+                    // To send multiple things use .write method and just call .send() after writng everything you wanted
+                    // res.write("<h1>The weather in "+ city +" is " +temp + " degrees celcius</h1>");
+                    // res.write("<h3>Currently " + description + " in "+ city +"</h3>");
+                    // res.write("<img src="+ imageUrl +"></br>");
+
+                    // res.send();
                     
                 })
             })
