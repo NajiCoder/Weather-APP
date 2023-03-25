@@ -88,8 +88,6 @@ app.post("/", function(req, res){
                     weatherDataObject["maxTemp"] = tempMax;
                     weatherDataObject["image"] = imageUrl;
 
-                    console.log(weatherDataObject);
-
                     res.redirect("/work");
                     
                     // To send multiple things use .write method and just call .send() after writng everything you wanted
