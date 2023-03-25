@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const express = require("express");
 
   
-const appKey = "ef1b3abbb663e9d15a3b35c580151915";
+const appKey = require("./private.js");
 
 const app = express();
 
