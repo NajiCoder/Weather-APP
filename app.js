@@ -1,9 +1,10 @@
+require("dotenv").config();
 const https = require("https");
 const bodyParser = require("body-parser");
 const express = require("express");
 
   
-const appKey = require("./private.js");
+const apiKey = process.env.API_KEY;
 
 const app = express();
 
@@ -38,7 +39,7 @@ app.post("/", function(req, res){
     weatherDataObject["cityName"] = city
 
     // Use the Geocoding API to get all the information on the city entered
-    const locationUrl = "https://api.openweathermap.org/geo/1.0/direct?q="+ city +"&appid=" + appKey
+    const locationUrl = "https://api.openweathermap.org/geo/1.0/direct?q="+ city +"&appid=" + apiKey
 
     // Use the https module to get the city information 
     https.get(locationUrl, function(response){
@@ -54,7 +55,7 @@ app.post("/", function(req, res){
             const lon = locationData[0].lon;
             
             // Weather API URL
-            const url = "https://api.openweathermap.org/data/2.5/weather?lat="+ lat +"&lon="+ lon +"&appid="+ appKey +"&units=metric";
+            const url = "https://api.openweathermap.org/data/2.5/weather?lat="+ lat +"&lon="+ lon +"&appid="+ apiKey +"&units=metric";
 
             // Using https module get the weather data
             https.get(url, function(response){

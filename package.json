@@ -1,8 +1,26 @@
 {
   "dependencies": {
     "body-parser": "^1.20.2",
+    "dotenv": "^16.0.3",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "lodash": "^4.17.21"
-  }
+  },
+  "name": "weatherproject",
+  "description": "Weather application with express",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NajiCoder/Weather-APP.git"
+  },
+  "author": "Naji",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NajiCoder/Weather-APP/issues"
+  },
+  "homepage": "https://github.com/NajiCoder/Weather-APP#readme"
 }
